@@ -5,6 +5,7 @@ import com.gachirex.fileSorter.dto.MediaResponse;
 import com.gachirex.fileSorter.model.Media;
 import com.gachirex.fileSorter.service.MediaService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tika.Tika;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -12,12 +13,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URLConnection;
+
 /**
  * @author : lämmchen
  * @mailto : tokotuulamm.L@gmail.com
  * @created : 17/12/2024
  **/
-@CrossOrigin(origins = "moz-extension://26543a28-208d-492e-8786-d59b21762ca6/manifest.json")
+@CrossOrigin(origins = "moz-extension://9bce0a9a-3fb0-420f-a10b-f210c688c502/manifest.json")
 @RestController
 @RequestMapping("/api/media")
 @RequiredArgsConstructor
@@ -49,9 +54,13 @@ public class MediaController {
     public ResponseEntity<byte[]> getMediaFile(@PathVariable Long id) {
         byte[] fileData = mediaService.getMediaFile(id);
 
+        // Find MIME type using Apache Tika
+        Tika tika = new Tika();
+        String contentType = tika.detect(fileData);
+
         return ResponseEntity.ok()
-                .contentType(MediaType.valueOf("video/webm")) // Static MIME type
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"media-" + id + ".webm\"")
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"media-" + id + "\"")
                 .body(fileData);
     }
 

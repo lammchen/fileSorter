@@ -1,18 +1,20 @@
 {
-    "manifest_version": 2,
-    "name": "Save Media to DB",
-    "version": "1.0",
-    "description": "Save media files to your personal database via the fileSorter API.",
-    "permissions": [
-      "contextMenus",
-      "activeTab",
-      "http://localhost:8080/*"
-    ],
-    "background": {
-      "scripts": ["background.js"]
-    },
-    "icons": {
-      "48": "icon.png"
-    }
+  "manifest_version": 2,
+  "name": "Save Media to DB",
+  "version": "2.0",
+  "description": "Save media files to your personal database via the fileSorter API.",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "http://localhost:8080/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon.png"
   }
-  
+}
