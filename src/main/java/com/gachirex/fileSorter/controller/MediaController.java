@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @mailto : tokotuulamm.L@gmail.com
  * @created : 17/12/2024
  **/
+@CrossOrigin(origins = "moz-extension://26543a28-208d-492e-8786-d59b21762ca6/manifest.json")
 @RestController
 @RequestMapping("/api/media")
 @RequiredArgsConstructor
