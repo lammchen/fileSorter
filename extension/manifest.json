@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "Save Media to DB",
+    "version": "1.0",
+    "description": "Save media files to your personal database via the fileSorter API.",
+    "permissions": [
+      "contextMenus",
+      "activeTab",
+      "http://localhost:8080/*"
+    ],
+    "background": {
+      "scripts": ["background.js"]
+    },
+    "icons": {
+      "48": "icon.png"
+    }
+  }
+  
