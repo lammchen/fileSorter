@@ -11,11 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.util.List;
 
 /**
  * @author : lämmchen
@@ -23,7 +26,7 @@ import java.net.URLConnection;
  * @created : 17/12/2024
  **/
 @CrossOrigin(origins = "moz-extension://9bce0a9a-3fb0-420f-a10b-f210c688c502/manifest.json")
-@RestController
+@Controller
 @RequestMapping("/api/media")
 @RequiredArgsConstructor
 public class MediaController {
@@ -31,7 +34,7 @@ public class MediaController {
     private final MediaService mediaService;
     private static final Logger logger = LoggerFactory.getLogger(MediaController.class);
 
-    @PostMapping
+    @PostMapping("/")
     public MediaResponse addMedia(@RequestBody MediaRequest request) throws Exception {
         Media media = mediaService.addMedia(
                 request.getName(),
@@ -41,6 +44,14 @@ public class MediaController {
         );
 
         return convertToResponse(media);
+    }
+
+    @GetMapping("/")
+    public String displayMediaCatalog(Model model) {
+        List<Media> mediaList = mediaService.getAllMedia();
+        model.addAttribute("mediaList", mediaList);
+
+        return "media-catalog";
     }
 
     @GetMapping("/{id}")

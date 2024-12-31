@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * @author : lämmchen
@@ -45,6 +46,14 @@ public class MediaService {
 
             return mediaRepository.save(media);
         }
+    }
+
+    /**
+     * Returns a list of all media in the repository.
+     * @return
+     */
+    public List<Media> getAllMedia() {
+        return mediaRepository.findAll();
     }
 
     /**

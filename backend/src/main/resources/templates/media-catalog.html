@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Catalog</title>
+</head>
+<body>
+<h1>Media Catalog</h1>
+<ul>
+    <!-- Itération sur la liste des médias -->
+    <li th:each="media : ${mediaList}">
+        <h2 th:text="${media.name}">Media Name</h2>
+        <p><strong>Labels:</strong> <span th:text="${media.labels}">Labels</span></p>
+        <p><strong>Collection:</strong> <span th:text="${media.collection}">Collection</span></p>
+        <a th:href="'/api/media/' + ${media.id} + '/file'" target="_blank">View Media</a>
+    </li>
+</ul>
+</body>
+</html>
